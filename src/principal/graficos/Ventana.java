@@ -12,7 +12,7 @@ public class Ventana extends JFrame {
     private static final long serialVersionUID = 5979421777239930009L;
 
     private String titulo;
-    private final  ImageIcon icono;
+    private final ImageIcon icono;
 
 
     public Ventana(final String titulo, final SuperficieDeDibujo sd) {
@@ -30,7 +30,7 @@ public class Ventana extends JFrame {
         setResizable(false);
         setLayout(new BorderLayout());
         add(sd, BorderLayout.CENTER);
-        //setUndecorated(true);
+        setUndecorated(true);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

@@ -10,13 +10,15 @@ public class Teclado implements KeyListener {
     public Tecla izquierda = new Tecla();
     public Tecla derecha = new Tecla();
 
+    public boolean corriendo = false;
+
     public void keyTyped(KeyEvent e) {
 
     }
 
 
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()){
+        switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
                 arriba.teclaPulsada();
                 break;
@@ -29,7 +31,12 @@ public class Teclado implements KeyListener {
             case KeyEvent.VK_D:
                 derecha.teclaPulsada();
                 break;
+            case KeyEvent.VK_SHIFT:
+                corriendo = true;
+                break;
 
+            case KeyEvent.VK_ESCAPE:
+                System.exit(0);
 
         }
 
@@ -37,7 +44,7 @@ public class Teclado implements KeyListener {
 
 
     public void keyReleased(KeyEvent e) {
-        switch (e.getKeyCode()){
+        switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
                 arriba.teclaLiberada();
                 break;
@@ -49,6 +56,9 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_D:
                 derecha.teclaLiberada();
+                break;
+            case KeyEvent.VK_SHIFT:
+                corriendo = false;
                 break;
         }
 

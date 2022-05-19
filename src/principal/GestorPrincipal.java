@@ -1,6 +1,5 @@
 package principal;
 
-import principal.control.GestorControles;
 import principal.graficos.SuperficieDeDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaDeEstado.GestorDeEstado;
@@ -14,41 +13,43 @@ public class GestorPrincipal {
     private SuperficieDeDibujo sd;
     private Ventana ventana;
     private GestorDeEstado ge;
-    
+
+    private static int fps = 0;
+    private static int aps = 0;
 
 
-    private GestorPrincipal(final String titulo,final int ancho ,final int alto){
+    private GestorPrincipal(final String titulo, final int ancho, final int alto) {
         this.titulo = titulo;
         this.ancho = ancho;
-        this.alto= alto;
+        this.alto = alto;
 
     }
-    public static void main(String[] args){
-        GestorPrincipal gp = new GestorPrincipal("Apocalipsis T.U.P.", 800 ,600);
 
-        Constantes.ANCHO_PANTALLA = 800;
-        Constantes.ALTO_PANTALLA = 600;
+    public static void main(String[] args) {
+        GestorPrincipal gp = new GestorPrincipal("Apocalipsis T.U.P.", Constantes.ANCHO_PANTALLA, Constantes.ALTO_PANTALLA);
+
 
         gp.iniciarJuego();
         gp.iniciarBuclePrincipal();
 
     }
+
     private void iniciarJuego() {
-        enFuncionamiento= true;
-        inicializar ();
+        enFuncionamiento = true;
+        inicializar();
     }
 
     private void inicializar() {
         sd = new SuperficieDeDibujo(ancho, alto);
-        ventana = new Ventana(titulo,sd);
+        ventana = new Ventana(titulo, sd);
         ge = new GestorDeEstado();
 
     }
 
 
     private void iniciarBuclePrincipal() {
-        int aps = 0;
-        int fps = 0;
+        int actualizacionesAcumuladas = 0;
+        int framesAcumulados = 0;
         // equivalencia ns por s
         final int NS_POR_SEGUNDO = 1000000000;
         //actualizaciones por segundo
@@ -77,17 +78,20 @@ public class GestorPrincipal {
             // cada vez que delta llegue a 1+ se actualiza
             while (delta >= 1) {
                 actualizar();
-                aps++;
-                Constantes.APS = aps;
+                actualizacionesAcumuladas++;
+
                 delta--;
             }
             dibujar();
-            fps++;
+            framesAcumulados++;
             if (System.nanoTime() - referenciaContador > NS_POR_SEGUNDO) {
-                System.out.println("FPS: "+fps + "APS: "+aps);
-                aps = 0;
-                Constantes.APS = aps;
-                fps = 0;
+
+
+                aps = actualizacionesAcumuladas;
+                fps = framesAcumulados;
+
+                actualizacionesAcumuladas = 0;
+                framesAcumulados = 0;
                 referenciaContador = System.nanoTime();
 
             }
@@ -96,12 +100,21 @@ public class GestorPrincipal {
 
     private void actualizar() {
         ge.actualizar();
+        sd.actualizar();
 
     }
 
     private void dibujar() {
         sd.dibujar(ge);
 
+    }
+
+    public static int obtenerAps() {
+        return aps;
+    }
+
+    public static int obtenerFps() {
+        return fps;
     }
 
 
