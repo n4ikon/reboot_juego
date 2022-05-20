@@ -2,7 +2,7 @@ package principal.maquinaDeEstado.estados.juego;
 
 import principal.Constantes;
 import principal.entes.Jugador;
-import principal.interfa_usuario.InterfazUsuario;
+import principal.interfa_usuario.MenuInferior;
 import principal.mapas.Mapa;
 import principal.maquinaDeEstado.EstadoJuego;
 
@@ -14,10 +14,12 @@ public class GestorJuego implements EstadoJuego {
     Mapa mapa;
 
     Jugador jugador;
+    MenuInferior menuInferior;
 
     public GestorJuego() {
         iniciarMapa(Constantes.RUTA_MAPA);
         iniciarJugador();
+        menuInferior = new MenuInferior(jugador);
 
     }
 
@@ -51,6 +53,7 @@ public class GestorJuego implements EstadoJuego {
     public void dibujar(Graphics g) {
         mapa.dibujar(g, (int) jugador.obtenerPosicionX(), (int) jugador.obtenerPosicionY());
         jugador.dibujar(g);
+        menuInferior.dibujar(g, jugador);
 
         g.setColor(Color.red);
         g.drawString("X = " + jugador.obtenerPosicionX(), 20, 20);
@@ -61,7 +64,6 @@ public class GestorJuego implements EstadoJuego {
         g.drawString("siguiente mapa : " + mapa.obtenerSiguienteMapa(), 20, 150);
         g.drawString("coordenadas salida X : " + mapa.obtenerPuntoSalida().getX() + " y =" + mapa.obtenerPuntoSalida().getY(), 20, 160);
 
-        InterfazUsuario.dibujarResistencia(g, Jugador.resistencia);
 
     }
 }

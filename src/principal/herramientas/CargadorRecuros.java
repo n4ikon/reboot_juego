@@ -9,84 +9,113 @@ import java.io.*;
 
 
 public class CargadorRecuros {
-    public static BufferedImage cargarImagenCompatibleOpaca(final String ruta){
+    public static BufferedImage cargarImagenCompatibleOpaca(final String ruta) {
 
-    Image imagen = null;
-    try{
-        //imagen = ImageIO.read(ClassLoader.class.getResource(ruta));
-        imagen = ImageIO.read(new File(ruta));
-    }catch(IOException e){
-        e.printStackTrace();
-
-    }
-    GraphicsConfiguration gc =GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-
-    BufferedImage imagenAcelerada = gc.createCompatibleImage(imagen.getWidth(null),imagen.getHeight(null), Transparency.OPAQUE);
-
-    Graphics g = imagenAcelerada.getGraphics();
-     g.drawImage(imagen,0,0,null);
-     g.dispose();
-     return imagenAcelerada;
-
-    }
-    public static BufferedImage cargarImagenCompatibleTranslucida(final String ruta){
         Image imagen = null;
-        try{
+        try {
             //imagen = ImageIO.read(ClassLoader.class.getResource(ruta));
             imagen = ImageIO.read(new File(ruta));
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
 
         }
-        GraphicsConfiguration gc =GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 
-        BufferedImage imagenAcelerada = gc.createCompatibleImage(imagen.getWidth(null),imagen.getHeight(null), Transparency.TRANSLUCENT);
+        BufferedImage imagenAcelerada = gc.createCompatibleImage(imagen.getWidth(null), imagen.getHeight(null), Transparency.OPAQUE);
 
         Graphics g = imagenAcelerada.getGraphics();
-        g.drawImage(imagen,0,0,null);
+        g.drawImage(imagen, 0, 0, null);
         g.dispose();
         return imagenAcelerada;
 
     }
-    public static String leerArchivoTexto(final String ruta){
+
+    public static BufferedImage cargarImagenCompatibleTranslucida(final String ruta) {
+        Image imagen = null;
+        try {
+            //imagen = ImageIO.read(ClassLoader.class.getResource(ruta));
+            imagen = ImageIO.read(new File(ruta));
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+
+        BufferedImage imagenAcelerada = gc.createCompatibleImage(imagen.getWidth(null), imagen.getHeight(null), Transparency.TRANSLUCENT);
+
+        Graphics g = imagenAcelerada.getGraphics();
+        g.drawImage(imagen, 0, 0, null);
+        g.dispose();
+        return imagenAcelerada;
+
+    }
+
+    public static String leerArchivoTexto(final String ruta) {
         String contenido = "";
         FileInputStream entradaBytes = null;
         BufferedReader lector = null;
 
         //InputStream entradaBytes = ClassLoader.class.getResourceAsStream(ruta);
         //BufferedReader lector = new BufferedReader(new InputStreamReader(entradaBytes));
-        try{
+        try {
             entradaBytes = new FileInputStream(ruta);
             lector = new BufferedReader(new InputStreamReader(entradaBytes));
-        }catch (FileNotFoundException e1){
+        } catch (FileNotFoundException e1) {
             e1.printStackTrace();
 
         }
         String linea;
-        try{
-            while ((linea = lector.readLine())!= null){
+        try {
+            while ((linea = lector.readLine()) != null) {
                 contenido += linea;
 
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if (entradaBytes != null){
+                if (entradaBytes != null) {
                     entradaBytes.close();
                 }
-                if (lector != null){
+                if (lector != null) {
                     lector.close();
                 }
 
-            }catch (IOException ex){
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
         return contenido;
 
     }
+
+    public static Font cargarFuentes(final String ruta) {
+        InputStream entradaBytes = null;
+        Font fuente = null;
+
+        try {
+            entradaBytes = new FileInputStream(ruta);
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        }
+
+        try {
+            fuente = Font.createFont(Font.TRUETYPE_FONT, entradaBytes);
+        } catch (FontFormatException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+        fuente = fuente.deriveFont(12f);
+
+        return fuente;
+    }
 }
+
 
 
 

@@ -49,6 +49,7 @@ public class SuperficieDeDibujo extends Canvas {
             return;
         }
         Graphics2D g = (Graphics2D) buffer.getDrawGraphics();
+        g.setFont(Constantes.FUENTE_PIXEL);
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, Constantes.ANCHO_PANTALLA, Constantes.ALTO_PANTALLA);
 

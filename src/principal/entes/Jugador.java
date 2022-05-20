@@ -36,6 +36,8 @@ public class Jugador {
     private int animacion;
     private int estado;
 
+    public static final int RESISTENCIA_TOTAL = 400;
+
     public static int resistencia = 400;
     private int recuperacion = 100;
     private boolean recuperado = true;

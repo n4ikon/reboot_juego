@@ -1,5 +1,9 @@
 package principal;
 
+import principal.herramientas.CargadorRecuros;
+
+import java.awt.*;
+
 public class Constantes {
     public static final int LADO_SPRITE = 32;
 
@@ -21,5 +25,5 @@ public class Constantes {
     public static String RUTA_RATON = "recursos/imagenes/iconos/raton.png";
     public static String RUTA_PERSONAJE = "recursos/imagenes/hojasPersonajes/1.png";
 
-
+    public static Font FUENTE_PIXEL = CargadorRecuros.cargarFuentes("recursos/fuentes/pixel.ttf");
 }
