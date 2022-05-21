@@ -1,5 +1,6 @@
 package principal;
 
+import principal.control.GestorControles;
 import principal.graficos.SuperficieDeDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaDeEstado.GestorDeEstado;
@@ -99,6 +100,11 @@ public class GestorPrincipal {
     }
 
     private void actualizar() {
+        if (GestorControles.teclado.inventarioActivo) {
+            ge.cambiarEstadActual(1);
+        } else {
+            ge.cambiarEstadActual(0);
+        }
         ge.actualizar();
         sd.actualizar();
 

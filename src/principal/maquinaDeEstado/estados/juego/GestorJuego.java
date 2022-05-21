@@ -55,14 +55,9 @@ public class GestorJuego implements EstadoJuego {
         jugador.dibujar(g);
         menuInferior.dibujar(g, jugador);
 
-        g.setColor(Color.red);
+        g.setColor(Color.white);
         g.drawString("X = " + jugador.obtenerPosicionX(), 20, 20);
         g.drawString("y = " + jugador.obtenerPosicionY(), 20, 30);
-
-        //g.fillRect((int) mapa.obtenerZonaSalida().getX(), (int) mapa.obtenerZonaSalida().getY(), (int) mapa.obtenerZonaSalida().getWidth(), (int) mapa.obtenerZonaSalida().getHeight());
-
-        g.drawString("siguiente mapa : " + mapa.obtenerSiguienteMapa(), 20, 150);
-        g.drawString("coordenadas salida X : " + mapa.obtenerPuntoSalida().getX() + " y =" + mapa.obtenerPuntoSalida().getY(), 20, 160);
 
 
     }

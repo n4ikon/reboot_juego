@@ -12,6 +12,8 @@ public class Teclado implements KeyListener {
 
     public boolean corriendo = false;
 
+    public boolean inventarioActivo = false;
+
     public void keyTyped(KeyEvent e) {
 
     }
@@ -33,6 +35,10 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_SHIFT:
                 corriendo = true;
+                break;
+
+            case KeyEvent.VK_I:
+                inventarioActivo = !inventarioActivo;
                 break;
 
             case KeyEvent.VK_ESCAPE:

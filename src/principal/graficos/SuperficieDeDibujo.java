@@ -60,8 +60,8 @@ public class SuperficieDeDibujo extends Canvas {
         ge.dibujar(g);
 
 
-        g.drawString("FPS : " + GestorPrincipal.obtenerFps(), 20, 100);
-        g.drawString("APS : " + GestorPrincipal.obtenerAps(), 20, 110);
+        g.drawString("FPS : " + GestorPrincipal.obtenerFps(), 20, 40);
+        g.drawString("APS : " + GestorPrincipal.obtenerAps(), 20, 50);
 
         raton.dibujar(g);
 

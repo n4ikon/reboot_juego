@@ -1,6 +1,7 @@
 package principal.maquinaDeEstado;
 
 import principal.maquinaDeEstado.estados.juego.GestorJuego;
+import principal.maquinaDeEstado.estados.menuDeJuego.GestorMenu;
 
 import java.awt.*;
 
@@ -9,26 +10,30 @@ public class GestorDeEstado {
     private EstadoJuego estadoActual;
 
 
-    public GestorDeEstado(){
+    public GestorDeEstado() {
         iniciaEstado();
         iniciaEstadoActual();
     }
 
     private void iniciaEstado() {
-        estados = new EstadoJuego[1];
-        estados[0]= new GestorJuego();
+        estados = new EstadoJuego[2];
+        estados[0] = new GestorJuego();
+        estados[1] = new GestorMenu();
     }
 
     private void iniciaEstadoActual() {
         estadoActual = estados[0];
     }
-    public void actualizar (){
+
+    public void actualizar() {
         estadoActual.actualizar();
     }
-    public void dibujar (final Graphics g){
+
+    public void dibujar(final Graphics g) {
         estadoActual.dibujar(g);
     }
-    public void cambiarEstadActual(final int nuevoEstado){
+
+    public void cambiarEstadActual(final int nuevoEstado) {
         estadoActual = estados[nuevoEstado];
     }
 

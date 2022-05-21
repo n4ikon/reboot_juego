@@ -33,8 +33,7 @@ public class Raton extends MouseAdapter {
     }
 
     public void dibujar(Graphics g) {
-        g.drawString("rx : " + posicion.getX(), 10, 200);
-        g.drawString("ry : " + posicion.getY(), 10, 220);
+        
     }
 
     public Cursor obtenerCursor() {

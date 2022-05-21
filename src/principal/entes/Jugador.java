@@ -310,7 +310,7 @@ public class Jugador {
         g.setColor(Color.green);
 
         g.drawImage(imagenActual, centroX, centroY, null);
-        g.drawString("Resistencia : " + resistencia, 20, 40);
+
 
     }
 
