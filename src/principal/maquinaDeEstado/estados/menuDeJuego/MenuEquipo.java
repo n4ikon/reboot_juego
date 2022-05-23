@@ -1,5 +1,7 @@
 package principal.maquinaDeEstado.estados.menuDeJuego;
 
+import principal.graficos.SuperficieDeDibujo;
+
 import java.awt.*;
 
 public class MenuEquipo extends SeccionMenu {
@@ -13,7 +15,7 @@ public class MenuEquipo extends SeccionMenu {
     }
 
 
-    public void dibujar(Graphics g) {
+    public void dibujar(Graphics g, SuperficieDeDibujo sd) {
 
     }
 }

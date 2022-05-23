@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class Constantes {
     public static final int LADO_SPRITE = 32;
+    public static int ladoCursor = 0;
 
 
     public static int ANCHO_JUEGO = 640;

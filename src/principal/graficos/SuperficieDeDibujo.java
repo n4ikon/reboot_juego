@@ -33,6 +33,7 @@ public class SuperficieDeDibujo extends Canvas {
         setCursor(raton.obtenerCursor());
         setPreferredSize(new Dimension(ancho, alto));
         addKeyListener(GestorControles.teclado);
+        addMouseListener(raton);
         setFocusable(true);
         requestFocus();
 
@@ -79,5 +80,9 @@ public class SuperficieDeDibujo extends Canvas {
 
     public int obtenerAlto() {
         return alto;
+    }
+
+    public Raton obtenerRaton() {
+        return raton;
     }
 }

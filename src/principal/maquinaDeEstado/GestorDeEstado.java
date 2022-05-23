@@ -1,5 +1,6 @@
 package principal.maquinaDeEstado;
 
+import principal.graficos.SuperficieDeDibujo;
 import principal.maquinaDeEstado.estados.juego.GestorJuego;
 import principal.maquinaDeEstado.estados.menuDeJuego.GestorMenu;
 
@@ -10,15 +11,15 @@ public class GestorDeEstado {
     private EstadoJuego estadoActual;
 
 
-    public GestorDeEstado() {
-        iniciaEstado();
+    public GestorDeEstado(final SuperficieDeDibujo sd) {
+        iniciaEstado(sd);
         iniciaEstadoActual();
     }
 
-    private void iniciaEstado() {
+    private void iniciaEstado(final SuperficieDeDibujo sd) {
         estados = new EstadoJuego[2];
         estados[0] = new GestorJuego();
-        estados[1] = new GestorMenu();
+        estados[1] = new GestorMenu(sd);
     }
 
     private void iniciaEstadoActual() {
