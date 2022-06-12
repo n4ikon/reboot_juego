@@ -1,5 +1,6 @@
 package principal;
 
+import conexion.HttpHelper;
 import principal.control.GestorControles;
 import principal.graficos.SuperficieDeDibujo;
 import principal.graficos.Ventana;
@@ -18,7 +19,6 @@ public class GestorPrincipal {
     private static int fps = 0;
     private static int aps = 0;
 
-
     private GestorPrincipal(final String titulo, final int ancho, final int alto) {
         this.titulo = titulo;
         this.ancho = ancho;
@@ -27,10 +27,12 @@ public class GestorPrincipal {
     }
 
     public static void main(String[] args) {
-        GestorPrincipal gp = new GestorPrincipal("Apocalipsis T.U.P.", Constantes.ANCHO_PANTALLA, Constantes.ALTO_PANTALLA);
-
+        GestorPrincipal gp = new GestorPrincipal("Apocalipsis T.U.P.", Constantes.ANCHO_PANTALLA,
+                Constantes.ALTO_PANTALLA);
 
         gp.iniciarJuego();
+        HttpHelper.getRequest();
+        HttpHelper.Post_JSON("carlos");
         gp.iniciarBuclePrincipal();
 
     }
@@ -47,15 +49,14 @@ public class GestorPrincipal {
 
     }
 
-
     private void iniciarBuclePrincipal() {
         int actualizacionesAcumuladas = 0;
         int framesAcumulados = 0;
         // equivalencia ns por s
         final int NS_POR_SEGUNDO = 1000000000;
-        //actualizaciones por segundo
+        // actualizaciones por segundo
         final int APS_OBJETIVO = 60;
-        //cuantos  ns transcurre por actualizacion
+        // cuantos ns transcurre por actualizacion
         final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;
 
         long referenciaActualizacion = System.nanoTime();
@@ -66,15 +67,14 @@ public class GestorPrincipal {
         // cantidad de tiempo que transcurre hasta la actualizacion
         double delta = 0;
 
-
         while (enFuncionamiento) {
-            //reinica el tiempo
+            // reinica el tiempo
             final long inicioBucle = System.nanoTime();
-            //mide el tiempo que transcurrio entre las variables
+            // mide el tiempo que transcurrio entre las variables
             tiempoTranscurrido = inicioBucle - referenciaActualizacion;
-            //se le da el valor del tiempo de cuando inicio el bucle
+            // se le da el valor del tiempo de cuando inicio el bucle
             referenciaActualizacion = inicioBucle;
-            //almacena la cantidad de tiempo transcurrido
+            // almacena la cantidad de tiempo transcurrido
             delta += tiempoTranscurrido / NS_POR_ACTUALIZACION;
             // cada vez que delta llegue a 1+ se actualiza
             while (delta >= 1) {
@@ -86,7 +86,6 @@ public class GestorPrincipal {
             dibujar();
             framesAcumulados++;
             if (System.nanoTime() - referenciaContador > NS_POR_SEGUNDO) {
-
 
                 aps = actualizacionesAcumuladas;
                 fps = framesAcumulados;
@@ -122,6 +121,5 @@ public class GestorPrincipal {
     public static int obtenerFps() {
         return fps;
     }
-
 
 }
