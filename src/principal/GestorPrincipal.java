@@ -1,10 +1,15 @@
 package principal;
 
+import com.google.gson.Gson;
+import conexion.Conversion;
 import conexion.HttpHelper;
+
 import principal.control.GestorControles;
 import principal.graficos.SuperficieDeDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaDeEstado.GestorDeEstado;
+
+import static conexion.HttpHelper.getRequest;
 
 public class GestorPrincipal {
     private boolean enFuncionamiento = false;
@@ -31,8 +36,10 @@ public class GestorPrincipal {
                 Constantes.ALTO_PANTALLA);
 
         gp.iniciarJuego();
-        HttpHelper.getRequest();
-        HttpHelper.Post_JSON("carlos");
+        getRequest();
+        //HttpHelper.Post_JSON("otro");
+
+
         gp.iniciarBuclePrincipal();
 
     }

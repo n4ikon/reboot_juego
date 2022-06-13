@@ -1,11 +1,10 @@
 package conexion;
 
+import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -16,7 +15,7 @@ import java.net.http.HttpResponse;
 public class HttpHelper {
     private String URL = "http://localhost:8080";
 
-    public static void getRequest() {
+    public static String getRequest() {
         // GET
         HttpClient cliente = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/Jugador")).build();
@@ -24,7 +23,13 @@ public class HttpHelper {
                 .thenApply(HttpResponse::body)
                 .thenAccept(System.out::println)
                 .join();
+
+
+
+        return cliente.toString();
     }
+
+
 
     public static void Post_JSON(String nombre) {
         String query_url = "http://localhost:8080/Jugador";
@@ -55,4 +60,10 @@ public class HttpHelper {
             System.out.println(e);
         }
     }
+
+ Gson gson = new Gson();
+    Conversion conversion = gson.fromJson(getRequest(),Conversion.class);
+
+
+
 }

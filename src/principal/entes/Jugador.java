@@ -1,5 +1,6 @@
 package principal.entes;
 
+import conexion.HttpHelper;
 import principal.Constantes;
 import principal.control.GestorControles;
 import principal.mapas.Mapa;
@@ -12,6 +13,8 @@ import java.awt.image.BufferedImage;
 public class Jugador {
     private double posicionX;
     private double posicionY;
+
+
 
 
     private int direccion;
@@ -43,11 +46,14 @@ public class Jugador {
     private boolean recuperado = true;
 
 
+
+
     private Mapa mapa;
 
     public Jugador(Mapa mapa) {
         posicionX = mapa.obtenerPosicionInicial().getX();
         posicionY = mapa.obtenerPosicionInicial().getY();
+
 
 
         direccion = 0;

@@ -1,5 +1,7 @@
 package principal.maquinaDeEstado.estados.menuDeJuego;
 
+import conexion.Conversion;
+import conexion.HttpHelper;
 import principal.Constantes;
 import principal.graficos.SuperficieDeDibujo;
 import principal.herramientas.DibujoDebug;
@@ -35,7 +37,7 @@ public class MenuInventario extends SeccionMenu {
         dibujaLimitePeso(g);
         if (sd.obtenerRaton().obtenerrectanguloPosicion().intersects
                 (EscaladorElemento.escalarRectanguloArriba(barraPeso))) {
-            GeneradorTooltip.dibujarTooltip(g, sd, "Limite de peo : " + pesoActual + "/" + limitePeso);
+            GeneradorTooltip.dibujarTooltip(g, sd, "Limite de peso : " + pesoActual + "/" + limitePeso);
 
         }
 
@@ -43,10 +45,12 @@ public class MenuInventario extends SeccionMenu {
 
     private void dibujaLimitePeso(Graphics g) {
 
+
         final Rectangle contenidoBarra = new Rectangle(barraPeso.x + 1, barraPeso.y + 1, barraPeso.width / (limitePeso / pesoActual), barraPeso.height - 2);
-        DibujoDebug.dibujarString(g, "Peso", barraPeso.x - 30, barraPeso.y + margenGeneral - 1, Color.black);
+        DibujoDebug.dibujarString(g, "peso", barraPeso.x - 30, barraPeso.y + margenGeneral - 1, Color.black);
         DibujoDebug.dibujarRectanguloRelleno(g, barraPeso, Color.GRAY);
         DibujoDebug.dibujarRectanguloRelleno(g, contenidoBarra, Color.orange);
+        DibujoDebug.dibujarString(g, "Nombre: " + Conversion.getNombre(), barraPeso.x - 30, barraPeso.y - 20 + margenGeneral - 1, Color.black);
     }
 
 
