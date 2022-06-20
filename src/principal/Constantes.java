@@ -1,5 +1,6 @@
 package principal;
 
+
 import principal.herramientas.CargadorRecuros;
 
 import java.awt.*;
@@ -27,5 +28,6 @@ public class Constantes {
     public static String RUTA_PERSONAJE = "recursos/imagenes/hojasPersonajes/1.png";
 
     public static Font FUENTE_PIXEL = CargadorRecuros.cargarFuentes("recursos/fuentes/pixel.ttf");
+    public String NOMBRE ;
 
 }

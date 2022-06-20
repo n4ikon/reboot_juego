@@ -11,22 +11,32 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.CompletableFuture;
 
-public class HttpHelper {
+public  class HttpHelper {
     private String URL = "http://localhost:8080";
 
-    public static String getRequest() {
+    public static void getRequest() {
         // GET
         HttpClient cliente = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/Jugador")).build();
-        cliente.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        CompletableFuture cf = cliente.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
-                .thenAccept(System.out::println)
-                .join();
+                .thenAccept(s -> {
+
+
+                    Conversion[] conversion= new Gson().fromJson(s, Conversion[].class)
+                            ;System.out.println(s);});
 
 
 
-        return cliente.toString();
+
+        HttpResponse<String> result = (HttpResponse<String>)cf.join();
+System.out.println(result);
+
+
+
+
     }
 
 
@@ -62,7 +72,7 @@ public class HttpHelper {
     }
 
  Gson gson = new Gson();
-    Conversion conversion = gson.fromJson(getRequest(),Conversion.class);
+    //Conversion conversion = gson.fromJson(getRequest(),Conversion.class);
 
 
 

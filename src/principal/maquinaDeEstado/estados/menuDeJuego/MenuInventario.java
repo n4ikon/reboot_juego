@@ -1,13 +1,13 @@
 package principal.maquinaDeEstado.estados.menuDeJuego;
 
 import conexion.Conversion;
-import conexion.HttpHelper;
+
 import principal.Constantes;
+import principal.Login;
 import principal.graficos.SuperficieDeDibujo;
 import principal.herramientas.DibujoDebug;
 import principal.herramientas.EscaladorElemento;
 import principal.herramientas.GeneradorTooltip;
-import principal.herramientas.MedidorStrings;
 
 import java.awt.*;
 
@@ -43,14 +43,14 @@ public class MenuInventario extends SeccionMenu {
 
     }
 
-    private void dibujaLimitePeso(Graphics g) {
+    public void dibujaLimitePeso(Graphics g ){
 
 
         final Rectangle contenidoBarra = new Rectangle(barraPeso.x + 1, barraPeso.y + 1, barraPeso.width / (limitePeso / pesoActual), barraPeso.height - 2);
         DibujoDebug.dibujarString(g, "peso", barraPeso.x - 30, barraPeso.y + margenGeneral - 1, Color.black);
         DibujoDebug.dibujarRectanguloRelleno(g, barraPeso, Color.GRAY);
         DibujoDebug.dibujarRectanguloRelleno(g, contenidoBarra, Color.orange);
-        DibujoDebug.dibujarString(g, "Nombre: " + Conversion.getNombre(), barraPeso.x - 30, barraPeso.y - 20 + margenGeneral - 1, Color.black);
+        DibujoDebug.dibujarString(g, "Nombre: " , barraPeso.x - 30, barraPeso.y - 20 + margenGeneral - 1, Color.black);
     }
 
 

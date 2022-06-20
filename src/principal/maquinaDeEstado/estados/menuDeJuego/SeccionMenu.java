@@ -1,5 +1,5 @@
 package principal.maquinaDeEstado.estados.menuDeJuego;
-
+import conexion.Conversion;
 import principal.Constantes;
 import principal.graficos.SuperficieDeDibujo;
 import principal.herramientas.DibujoDebug;
@@ -7,6 +7,7 @@ import principal.herramientas.DibujoDebug;
 import java.awt.*;
 
 public abstract class SeccionMenu {
+    Conversion conversion;
     protected final String nombreSeccion;
     protected final Rectangle etiquetaMenu;
 

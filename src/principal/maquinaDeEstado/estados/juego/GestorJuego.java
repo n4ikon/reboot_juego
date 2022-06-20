@@ -21,6 +21,7 @@ public class GestorJuego implements EstadoJuego {
         iniciarJugador();
         menuInferior = new MenuInferior(jugador);
 
+
     }
 
     private void recargarJuego() {

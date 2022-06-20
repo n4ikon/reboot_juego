@@ -1,7 +1,5 @@
 package principal;
 
-import com.google.gson.Gson;
-import conexion.Conversion;
 import conexion.HttpHelper;
 
 import principal.control.GestorControles;
@@ -35,9 +33,14 @@ public class GestorPrincipal {
         GestorPrincipal gp = new GestorPrincipal("Apocalipsis T.U.P.", Constantes.ANCHO_PANTALLA,
                 Constantes.ALTO_PANTALLA);
 
+
         gp.iniciarJuego();
         getRequest();
-        //HttpHelper.Post_JSON("otro");
+        //HttpHelper.Post_JSON("n4ikon");
+        new Login();
+
+
+        System.out.println();
 
 
         gp.iniciarBuclePrincipal();
