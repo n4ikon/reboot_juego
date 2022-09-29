@@ -1,8 +1,8 @@
 package principal.entes;
 
-import conexion.HttpHelper;
 import principal.Constantes;
 import principal.control.GestorControles;
+import principal.herramientas.DibujoDebug;
 import principal.mapas.Mapa;
 import principal.sprites.HojaSprites;
 
@@ -79,7 +79,9 @@ public class Jugador {
         animar();
 
 
+
     }
+
 
     public void gestinarVelocidadResistencia() {
         if (GestorControles.teclado.corriendo && resistencia > 0) {

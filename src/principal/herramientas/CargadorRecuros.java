@@ -38,6 +38,7 @@ public class CargadorRecuros {
         } catch (IOException e) {
             e.printStackTrace();
 
+
         }
         GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 

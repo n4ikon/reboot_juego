@@ -2,6 +2,9 @@ package principal.mapas;
 
 import principal.Constantes;
 import principal.herramientas.CargadorRecuros;
+import principal.herramientas.DibujoDebug;
+
+import principal.inventario.ContenedorObjetos;
 import principal.sprites.HojaSprites;
 import principal.sprites.Sprites;
 
@@ -26,7 +29,9 @@ public class Mapa {
     private final Sprites[] paleta;
     private final boolean[] colisiones;
 
-    public ArrayList<Rectangle> areasColision = new ArrayList<Rectangle>();
+    public final ArrayList<Rectangle> areasColision = new ArrayList<Rectangle>();
+    public ArrayList<ContenedorObjetos> objetosMapa;
+
 
     private final int[] sprite;
 
@@ -73,6 +78,12 @@ public class Mapa {
 
         zonaSalida = new Rectangle();
 
+        if (partes.length > 8 ){System.out.println(partes.length);
+            String informacionObjetos = partes [8];
+        objetosMapa = asignarObjetos(informacionObjetos);
+        }
+
+
 
     }
 
@@ -108,6 +119,33 @@ public class Mapa {
 
         }
         return colisiones;
+    }
+   private ArrayList<ContenedorObjetos> asignarObjetos(final String informacionObjetos){
+        final ArrayList<ContenedorObjetos> objetos = new ArrayList<ContenedorObjetos>();
+        String[] contenedoresObjetos = informacionObjetos.split("#");
+        for (String contenedorIndividual:contenedoresObjetos){
+        final ArrayList<Integer> idObjetos = new ArrayList<Integer>();
+            final ArrayList<Integer> cantidadObjetos = new ArrayList<Integer>();
+            final String[] divisionInformacionObjetos = contenedorIndividual.split(":");
+            final String[] coordenadas = divisionInformacionObjetos[0].split(",");
+
+            final Point posicionContenedor = new Point(Integer.parseInt(coordenadas[0]),Integer.parseInt(coordenadas[1]));
+            final String[] objetosCantidades = divisionInformacionObjetos[1].split("/");
+            for ( String objetoActual : objetosCantidades ){
+                final String[] datosObjetoActual = objetoActual.split("-");
+                idObjetos.add(Integer.parseInt(datosObjetoActual[0]));
+                cantidadObjetos.add(Integer.parseInt(datosObjetoActual[1]));
+            }
+            final int[] idObjetosArray = new int[idObjetos.size()];
+            final int[] cantidadObjetosArray = new int[cantidadObjetos.size()];
+            for (int i = 0; i < idObjetosArray.length; i++) {
+                idObjetosArray[i] = idObjetos.get(i);
+                cantidadObjetosArray[i] = cantidadObjetos.get(i);
+            }
+            final ContenedorObjetos contenedor = new ContenedorObjetos(posicionContenedor,idObjetosArray,cantidadObjetosArray);
+            objetos.add(contenedor);
+        }
+        return objetos;
     }
 
     private int[] extraerSprite(final String[] cadenasSprites) {
@@ -186,11 +224,18 @@ public class Mapa {
                 int puntoX = x * Constantes.LADO_SPRITE - posicionX + MARGEN_X;
                 int puntoY = y * Constantes.LADO_SPRITE - posicionY + MARGEN_Y;
 
-                g.drawImage(imagen, puntoX, puntoY, null);
+                DibujoDebug.dibujarImagen(g,imagen, puntoX, puntoY);
 
             }
 
-        }
+        }if (partes.length > 8){
+        if (!objetosMapa.isEmpty()){
+            for (ContenedorObjetos contenedor : objetosMapa){
+                final int puntoX = contenedor.obtenerPosicion().x*Constantes.LADO_SPRITE - posicionX + MARGEN_X;
+                final int puntoY = contenedor.obtenerPosicion().y*Constantes.LADO_SPRITE - posicionY +MARGEN_Y;
+                contenedor.dibujar(g,puntoX,puntoY);
+            }
+        }}
 
     }
 

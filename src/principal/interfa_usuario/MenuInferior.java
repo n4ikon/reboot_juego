@@ -1,9 +1,14 @@
 package principal.interfa_usuario;
 
+import com.google.gson.Gson;
+import conexion.Conversion;
+import conexion.HttpHelper;
 import principal.Constantes;
+import principal.Login;
 import principal.entes.Jugador;
 import principal.herramientas.DibujoDebug;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class MenuInferior {
@@ -19,6 +24,8 @@ public class MenuInferior {
     private Color verdeOscuro;
     private Color rosaClaro;
     private Color rosaOscuro;
+
+
 
     public MenuInferior(final Jugador jugador) {
 

@@ -1,13 +1,14 @@
 package principal;
 
 import conexion.HttpHelper;
-
 import principal.control.GestorControles;
 import principal.graficos.SuperficieDeDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaDeEstado.GestorDeEstado;
+import principal.maquinaDeEstado.estados.menuDeJuego.MenuInventario;
 
 import static conexion.HttpHelper.getRequest;
+
 
 public class GestorPrincipal {
     private boolean enFuncionamiento = false;
@@ -29,18 +30,16 @@ public class GestorPrincipal {
 
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
+
+
+
         GestorPrincipal gp = new GestorPrincipal("Apocalipsis T.U.P.", Constantes.ANCHO_PANTALLA,
                 Constantes.ALTO_PANTALLA);
 
 
         gp.iniciarJuego();
-        getRequest();
-        //HttpHelper.Post_JSON("n4ikon");
-        new Login();
 
-
-        System.out.println();
 
 
         gp.iniciarBuclePrincipal();

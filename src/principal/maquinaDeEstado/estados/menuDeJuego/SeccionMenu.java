@@ -1,13 +1,13 @@
 package principal.maquinaDeEstado.estados.menuDeJuego;
 import conexion.Conversion;
 import principal.Constantes;
+import principal.Login;
 import principal.graficos.SuperficieDeDibujo;
 import principal.herramientas.DibujoDebug;
 
 import java.awt.*;
 
 public abstract class SeccionMenu {
-    Conversion conversion;
     protected final String nombreSeccion;
     protected final Rectangle etiquetaMenu;
 
@@ -71,4 +71,5 @@ public abstract class SeccionMenu {
         final Rectangle etiquetaEScalada = new Rectangle((int) (etiquetaMenu.x * Constantes.FACTOR_ESCALADO_X), (int) (etiquetaMenu.y * Constantes.FACTOR_ESCALADO_Y), (int) (etiquetaMenu.width * Constantes.FACTOR_ESCALADO_X), (int) (etiquetaMenu.height * Constantes.FACTOR_ESCALADO_Y));
         return etiquetaEScalada;
     }
+
 }

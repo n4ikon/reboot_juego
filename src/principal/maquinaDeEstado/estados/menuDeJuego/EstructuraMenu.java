@@ -5,6 +5,8 @@ import principal.herramientas.DibujoDebug;
 
 import java.awt.*;
 
+import static conexion.HttpHelper.getRequest;
+
 public class EstructuraMenu {
     public final Color COLOR_BANER_SUPERIOR;
     public final Color COLOR_BANER_LATERAL;
@@ -41,6 +43,7 @@ public class EstructuraMenu {
     }
 
     public void dibujar(final Graphics g) {
+
         DibujoDebug.dibujarRectanguloRelleno(g, BANER_SUPERIOR, COLOR_BANER_SUPERIOR);
         DibujoDebug.dibujarRectanguloRelleno(g, BANER_LATERAL, COLOR_BANER_LATERAL);
         DibujoDebug.dibujarRectanguloRelleno(g, FONDO, COLOR_FONDO);

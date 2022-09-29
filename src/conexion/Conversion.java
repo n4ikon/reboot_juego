@@ -10,17 +10,18 @@ public class Conversion {
 
     @SerializedName("id")
    private String id;
+    @SerializedName("password")
+    private String password;
 
 
 
-
-    public Conversion(String nombre, String id){
+    private Conversion(String nombre, String id){
     this.id = id;
     this.nombre = nombre; ;
 }
 
 
-public  String getNombre(){
+ public  String getNombre(){
 
    return this.nombre;
 }
@@ -36,6 +37,13 @@ public  void setNombre(String nombre){
     public   void setId( String id){
       id= id;
 
+    }
+
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String password){
+        password = password;
     }
 
 }

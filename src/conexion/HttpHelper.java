@@ -3,7 +3,10 @@ package conexion;
 import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
+import principal.Login;
+import principal.maquinaDeEstado.estados.menuDeJuego.MenuInventario;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -13,8 +16,12 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
+
+
 public  class HttpHelper {
     private String URL = "http://localhost:8080";
+
+
 
     public static void getRequest() {
         // GET
@@ -22,17 +29,29 @@ public  class HttpHelper {
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/Jugador")).build();
         CompletableFuture cf = cliente.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
-                .thenAccept(s -> {
+                .thenAccept(JsonUsable -> {
 
 
-                    Conversion[] conversion= new Gson().fromJson(s, Conversion[].class)
-                            ;System.out.println(s);});
+                    Conversion[] conversion= new Gson().fromJson(JsonUsable, Conversion[].class)
+                            ;
+                    for (int i = 0; i < conversion.length ; i++) {
+                        if ( Login.nombreLogin.equals(conversion[i].getNombre()) && Login.passwordLogin.equals(conversion[i].getPassword())){
+                            MenuInventario.nombre = Login.nombreLogin;
+
+
+
+                        }
+
+                    }
+
+                    });
 
 
 
 
         HttpResponse<String> result = (HttpResponse<String>)cf.join();
-System.out.println(result);
+
+
 
 
 
@@ -41,7 +60,7 @@ System.out.println(result);
 
 
 
-    public static void Post_JSON(String nombre) {
+    public static void Post_JSON(String nombre ) {
         String query_url = "http://localhost:8080/Jugador";
         String json =String.format("{ \"nombre\" : \"%s\"}", nombre);
         try {
