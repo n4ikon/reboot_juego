@@ -27,7 +27,8 @@ public class Constantes {
     public static String RUTA_RATON = "recursos/imagenes/iconos/raton.png";
 
     public static String RUTA_PERSONAJE = "recursos/imagenes/hojasPersonajes/1.png";
-    public static String RUTA_OBJETOS = "recursos/imagenes/hojasObjetos/objetos1.png";
+    public static String RUTA_OBJETOS = "recursos/imagenes/hojasObjetos/objetos.png";
+    public static String RUTA_OBJETOS_ARMAS = "recursos/imagenes/hojasObjetos/armas.png";
 
 
     public static Font FUENTE_PIXEL = CargadorRecuros.cargarFuentes("recursos/fuentes/pixel.ttf");

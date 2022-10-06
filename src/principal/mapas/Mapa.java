@@ -1,6 +1,8 @@
 package principal.mapas;
 
 import principal.Constantes;
+import principal.ElementosPrincipales;
+import principal.control.GestorControles;
 import principal.herramientas.CargadorRecuros;
 import principal.herramientas.DibujoDebug;
 
@@ -179,21 +181,22 @@ public class Mapa {
 
     }
 
-    public void actualizar(final int posicionX, final int posiciionY) {
-        actualizarAreasColisicion(posicionX, posiciionY);
-        actualizarZonaSalida(posicionX, posiciionY);
+    public void actualizar() {
+        actualizarAreasColisicion();
+        actualizarZonaSalida();
+        actualizarRecorgerObjeto();
 
     }
 
-    private void actualizarAreasColisicion(final int posicionX, final int posicionY) {
+    private void actualizarAreasColisicion() {
         if (!areasColision.isEmpty()) {
             areasColision.clear();
         }
         for (int y = 0; y < this.alto; y++) {
             for (int x = 0; x < this.ancho; x++) {
 
-                int puntoX = x * Constantes.LADO_SPRITE - posicionX + MARGEN_X;
-                int puntoY = y * Constantes.LADO_SPRITE - posicionY + MARGEN_Y;
+                int puntoX = x * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerPosicionXInt() + MARGEN_X;
+                int puntoY = y * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerPosicionYInt() + MARGEN_Y;
 
                 if (colisiones[x + y * this.ancho]) {
                     final Rectangle r = new Rectangle(puntoX, puntoY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
@@ -205,24 +208,37 @@ public class Mapa {
 
     }
 
-    private void actualizarZonaSalida(final int posicionX, final int posicionY) {
+    private void actualizarZonaSalida() {
 
-        int puntoX = ((int) puntoSalida.getX()) * Constantes.LADO_SPRITE - posicionX + MARGEN_X;
-        int puntoY = ((int) puntoSalida.getY()) * Constantes.LADO_SPRITE - posicionY + MARGEN_Y;
+        int puntoX = ((int) puntoSalida.getX()) * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerPosicionXInt() + MARGEN_X;
+        int puntoY = ((int) puntoSalida.getY()) * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerPosicionYInt() + MARGEN_Y;
 
         zonaSalida = new Rectangle(puntoX, puntoY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
 
     }
+    private void actualizarRecorgerObjeto(){
+        if (partes.length > 8){
+        if (!objetosMapa.isEmpty()){
+            final Rectangle areaJugador = new Rectangle(ElementosPrincipales.jugador.obtenerPosicionXInt(),ElementosPrincipales.jugador.obtenerPosicionYInt(),Constantes.LADO_SPRITE,Constantes.LADO_SPRITE);
+        for (int i = 0 ; i < objetosMapa.size();  i++ ){
+            final ContenedorObjetos contenedor = objetosMapa.get(i);
+            final Rectangle posicionContenedor = new Rectangle(contenedor.obtenerPosicion().x * Constantes.LADO_SPRITE,contenedor.obtenerPosicion().y* Constantes.LADO_SPRITE, Constantes.LADO_SPRITE,Constantes.LADO_SPRITE);
+            if (areaJugador.intersects(posicionContenedor)&& GestorControles.teclado.recoger){ElementosPrincipales.inventario.recojerObjetos(contenedor);objetosMapa.remove(i);}
+            }
+          }
+        }
+    }
 
-    public void dibujar(Graphics g, int posicionX, int posicionY) {
+
+    public void dibujar(Graphics g) {
 
 
         for (int y = 0; y < this.alto; y++) {
             for (int x = 0; x < this.ancho; x++) {
                 BufferedImage imagen = paleta[sprite[x + y * this.ancho]].obtenerImagen();
 
-                int puntoX = x * Constantes.LADO_SPRITE - posicionX + MARGEN_X;
-                int puntoY = y * Constantes.LADO_SPRITE - posicionY + MARGEN_Y;
+                int puntoX = x * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerPosicionXInt() + MARGEN_X;
+                int puntoY = y * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerPosicionYInt() + MARGEN_Y;
 
                 DibujoDebug.dibujarImagen(g,imagen, puntoX, puntoY);
 
@@ -231,19 +247,19 @@ public class Mapa {
         }if (partes.length > 8){
         if (!objetosMapa.isEmpty()){
             for (ContenedorObjetos contenedor : objetosMapa){
-                final int puntoX = contenedor.obtenerPosicion().x*Constantes.LADO_SPRITE - posicionX + MARGEN_X;
-                final int puntoY = contenedor.obtenerPosicion().y*Constantes.LADO_SPRITE - posicionY +MARGEN_Y;
+                final int puntoX = contenedor.obtenerPosicion().x*Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerPosicionXInt() + MARGEN_X;
+                final int puntoY = contenedor.obtenerPosicion().y*Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerPosicionYInt() +MARGEN_Y;
                 contenedor.dibujar(g,puntoX,puntoY);
             }
         }}
 
     }
 
-    public Rectangle obtenerBordes(final int posicionX, final int posicionY, final int anchoJugador, final int altoJugador) {
-        int x = MARGEN_X - posicionX + anchoJugador;
-        int y = MARGEN_Y - posicionY + altoJugador;
-        int ancho = this.ancho * Constantes.LADO_SPRITE - anchoJugador * 2;
-        int alto = this.alto * Constantes.LADO_SPRITE - altoJugador * 2;
+    public Rectangle obtenerBordes(final int posicionX, final int posicionY) {
+        int x = MARGEN_X - posicionX + ElementosPrincipales.jugador.obtenerAncho();
+        int y = MARGEN_Y - posicionY + ElementosPrincipales.jugador.obtenerAlto();
+        int ancho = this.ancho * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerAncho() * 2;
+        int alto = this.alto * Constantes.LADO_SPRITE - ElementosPrincipales.jugador.obtenerAlto() * 2;
 
         return new Rectangle(x, y, ancho, alto);
 

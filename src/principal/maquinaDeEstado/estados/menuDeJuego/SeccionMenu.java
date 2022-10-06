@@ -11,6 +11,8 @@ public abstract class SeccionMenu {
     protected final String nombreSeccion;
     protected final Rectangle etiquetaMenu;
 
+    protected final int margenGenearl = 8;
+
     public SeccionMenu(final String nombreSeccion, final Rectangle etiquetaMenu) {
         this.nombreSeccion = nombreSeccion;
         this.etiquetaMenu = etiquetaMenu;

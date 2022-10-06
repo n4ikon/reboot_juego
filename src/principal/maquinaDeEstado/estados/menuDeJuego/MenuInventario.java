@@ -1,12 +1,13 @@
 package principal.maquinaDeEstado.estados.menuDeJuego;
 
 import principal.Constantes;
+import principal.ElementosPrincipales;
 import principal.graficos.SuperficieDeDibujo;
 import principal.herramientas.DibujoDebug;
 import principal.herramientas.EscaladorElemento;
 import principal.herramientas.GeneradorTooltip;
 import principal.herramientas.MedidorStrings;
-//import principal.inventario.Inventario;
+import principal.inventario.Inventario;
 
 import java.awt.*;
 
@@ -16,7 +17,7 @@ public class MenuInventario extends SeccionMenu {
     private final int margenGeneral = 8;
 
     private final Rectangle barraPeso;
-    //private final Inventario inventario;
+
     private final EstructuraMenu em;
     public static String nombre;
 
@@ -27,7 +28,6 @@ public class MenuInventario extends SeccionMenu {
         this.em = em;
 
         barraPeso = new Rectangle(Constantes.ANCHO_JUEGO - anchoBarra - 12, em.BANER_SUPERIOR.height + margenGeneral, anchoBarra, 8);
- //inventario = new Inventario();
     }
 
 
@@ -39,8 +39,8 @@ public class MenuInventario extends SeccionMenu {
     public void dibujar(Graphics g, SuperficieDeDibujo sd) {
         dibujaLimitePeso(g);
         dibujarElementosInventario(g,em);
-        //dibujarSpritesInventario(g,em);
-        //dibujarPaginador(g,em);
+        dibujarSpritesInventario(g,em);
+        dibujarPaginador(g,em);
 
         if (sd.obtenerRaton().obtenerrectanguloPosicion().intersects
                 (EscaladorElemento.escalarRectanguloArriba(barraPeso))) {
@@ -69,16 +69,16 @@ public class MenuInventario extends SeccionMenu {
             }
         }
     }
-    /*private void dibujarSpritesInventario(final Graphics g,EstructuraMenu em){
+    private void dibujarSpritesInventario(final Graphics g,EstructuraMenu em){
         final Point puntoInicial = new Point(em.FONDO.x + 16, barraPeso.y + barraPeso.height + margenGeneral );
-        for (int i = 0; i < inventario.objetos.size(); i++) {
-            DibujoDebug.dibujarImagen(g,inventario.objetos.get(i).obtenerSprite().obtenerImagen(),
+        for (int i = 0; i < ElementosPrincipales.inventario.objetos.size(); i++) {
+            DibujoDebug.dibujarImagen(g,ElementosPrincipales.inventario.objetos.get(i).obtenerSprite().obtenerImagen(),
                     puntoInicial.x + i *(Constantes.LADO_SPRITE + margenGeneral),puntoInicial.y);
             g.setColor(Color.black);
             DibujoDebug.dibujarRectanguloRelleno(g,puntoInicial.x + i * (Constantes.LADO_SPRITE + margenGeneral)+ Constantes.LADO_SPRITE - 12
             ,puntoInicial.y + Constantes.LADO_SPRITE - 8 ,12,8);
             g.setColor(Color.white);
-            String texto = "" + inventario.objetos.get(i).obtenerCantidad();
+            String texto = "" + ElementosPrincipales.inventario.objetos.get(i).obtenerCantidad();
             DibujoDebug.dibujarString(g,texto,puntoInicial.x + i *(Constantes.LADO_SPRITE + margenGeneral)+ Constantes.LADO_SPRITE - MedidorStrings.medirAnchoPixeles(g,texto),
                     puntoInicial.y + Constantes.LADO_SPRITE - 1);
         }
@@ -95,6 +95,6 @@ public class MenuInventario extends SeccionMenu {
         DibujoDebug.dibujarRectanguloRelleno(g,anterior);
         DibujoDebug.dibujarRectanguloRelleno(g,siguiente);
     }
-*/
+
 
 }

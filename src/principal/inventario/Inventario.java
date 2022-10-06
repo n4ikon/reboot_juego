@@ -11,13 +11,15 @@ public class Inventario {
     public Inventario(){
 
         objetos = new ArrayList<Objeto>();
-        objetos.add(RegistrosObjetos.objetos[0]);
-        objetos.add(RegistrosObjetos.objetos[1]);
-        objetos.add(RegistrosObjetos.objetos[2]);
-        objetos.add(RegistrosObjetos.objetos[3]);
 
-        incrementarObjeto(RegistrosObjetos.objetos[3],1 );
 
+    }
+    public void recojerObjetos(final ContenedorObjetos co){
+        for (Objeto objeto : co.obtenerObjetos()){
+            if (objetoExiste(objeto)){incrementarObjeto(objeto, objeto.obtenerCantidad());
+            }else {objetos.add(objeto);}
+
+        }
     }
     public boolean incrementarObjeto(final Objeto objeto, final int cantidad ) {
         boolean incrementado = false;
@@ -29,5 +31,15 @@ public class Inventario {
             }
         }
         return incrementado;
+    }
+    public boolean objetoExiste(final Objeto objeto){
+        boolean existe = false;
+        for(Objeto objetoActual : objetos){
+            if(objetoActual.obtenerId()==objeto.obtenerId()){
+                existe = true;
+                break;
+            }
+        }
+        return existe;
     }
 }

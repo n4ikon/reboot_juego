@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import conexion.Conversion;
 import conexion.HttpHelper;
 import principal.Constantes;
+import principal.ElementosPrincipales;
 import principal.Login;
 import principal.entes.Jugador;
 import principal.herramientas.DibujoDebug;
@@ -27,7 +28,7 @@ public class MenuInferior {
 
 
 
-    public MenuInferior(final Jugador jugador) {
+    public MenuInferior() {
 
         int altoMenu = 64;
         areaInventario = new Rectangle(0, Constantes.ALTO_JUEGO - altoMenu, Constantes.ANCHO_JUEGO, altoMenu);
@@ -44,11 +45,11 @@ public class MenuInferior {
         rosaOscuro = new Color(128, 0, 74);
     }
 
-    public void dibujar(final Graphics g, final Jugador jugador) {
+    public void dibujar(final Graphics g) {
         dibujarAreaInventario(g);
         dibujarBarraPoder(g);
         dibujarBarraVitalidad(g);
-        dibujarBarraResistencia(g, Jugador.resistencia);
+        dibujarBarraResistencia(g);
         dibujarBarraExperiencia(g, 75);
         dibujarRanurasObjetos(g);
 
@@ -89,10 +90,10 @@ public class MenuInferior {
         DibujoDebug.dibujarString(g, "1000", anchoTotal + 45, areaInventario.y + medidaVertical * 6);
     }
 
-    private void dibujarBarraResistencia(final Graphics g, final int resistencia) {
+    private void dibujarBarraResistencia(final Graphics g) {
         final int medidaVertical = 4;
         final int anchoTotal = 100;
-        final int ancho = 100 * resistencia / Jugador.RESISTENCIA_TOTAL;
+        final int ancho = 100 * ElementosPrincipales.jugador.obtenerResistencia() / Jugador.RESISTENCIA_TOTAL;
 
         DibujoDebug.dibujarRectanguloRelleno(g, areaInventario.x + 35, areaInventario.y + medidaVertical * 7, ancho,
                 medidaVertical, verdeClaro);
@@ -101,7 +102,7 @@ public class MenuInferior {
 
         g.setColor(Color.white);
         DibujoDebug.dibujarString(g, "RST", areaInventario.x + 10, areaInventario.y + medidaVertical * 9);
-        DibujoDebug.dibujarString(g, "" + resistencia, anchoTotal + 45, areaInventario.y + medidaVertical * 9);
+        DibujoDebug.dibujarString(g, "" +ElementosPrincipales.jugador.obtenerResistencia(), anchoTotal + 45, areaInventario.y + medidaVertical * 9);
     }
 
     private void dibujarBarraExperiencia(final Graphics g, final int experiencia) {

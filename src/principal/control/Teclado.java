@@ -10,6 +10,8 @@ public class Teclado implements KeyListener {
     public Tecla izquierda = new Tecla();
     public Tecla derecha = new Tecla();
 
+    public boolean recoger = false;
+
     public boolean corriendo = false;
 
     public boolean inventarioActivo = false;
@@ -32,6 +34,9 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_D:
                 derecha.teclaPulsada();
+                break;
+            case KeyEvent.VK_E:
+                recoger = true;
                 break;
             case KeyEvent.VK_SHIFT:
                 corriendo = true;
@@ -62,6 +67,9 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_D:
                 derecha.teclaLiberada();
+                break;
+            case KeyEvent.VK_E:
+                recoger = false;
                 break;
             case KeyEvent.VK_SHIFT:
                 corriendo = false;

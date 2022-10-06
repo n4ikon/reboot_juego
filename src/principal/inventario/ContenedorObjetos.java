@@ -15,7 +15,7 @@ public class ContenedorObjetos {
         this.posicion = posicion;
         this.objetos = new Objeto[objetos.length];
         for (int  i = 0; i  <objetos.length ;  i++) {
-            this.objetos[i] = RegistrosObjetos.objetos[objetos[i]];
+            this.objetos[i] = RegistrosObjetos.obtenerObjeto(objetos[i]);
             this.objetos[i].incrementarCantidad(cantidades[i]);
 
         }
@@ -26,5 +26,8 @@ public class ContenedorObjetos {
     }
     public Point obtenerPosicion(){
         return posicion;
+    }
+    public Objeto[] obtenerObjetos(){
+        return objetos;
     }
 }

@@ -1,6 +1,7 @@
 package principal.entes;
 
 import principal.Constantes;
+import principal.ElementosPrincipales;
 import principal.control.GestorControles;
 import principal.herramientas.DibujoDebug;
 import principal.mapas.Mapa;
@@ -41,18 +42,14 @@ public class Jugador {
 
     public static final int RESISTENCIA_TOTAL = 400;
 
-    public static int resistencia = 400;
+    private int resistencia = 400;
     private int recuperacion = 100;
     private boolean recuperado = true;
 
 
-
-
-    private Mapa mapa;
-
-    public Jugador(Mapa mapa) {
-        posicionX = mapa.obtenerPosicionInicial().getX();
-        posicionY = mapa.obtenerPosicionInicial().getY();
+    public Jugador() {
+        posicionX = ElementosPrincipales.mapa.obtenerPosicionInicial().getX();
+        posicionY = ElementosPrincipales.mapa.obtenerPosicionInicial().getY();
 
 
 
@@ -67,7 +64,7 @@ public class Jugador {
         estado = 0;
 
 
-        this.mapa = mapa;
+
 
     }
 
@@ -210,8 +207,8 @@ public class Jugador {
     }
 
     private boolean enColisionArriba(int velocidadY) {
-        for (int r = 0; r < mapa.areasColision.size(); r++) {
-            final Rectangle area = mapa.areasColision.get(r);
+        for (int r = 0; r < ElementosPrincipales.mapa.areasColision.size(); r++) {
+            final Rectangle area = ElementosPrincipales.mapa.areasColision.get(r);
 
             int origenX = area.x;
             int origenY = area.y + velocidadY * (int) velocidad + 3 * (int) velocidad;
@@ -225,8 +222,8 @@ public class Jugador {
     }
 
     private boolean enColisionAbajo(int velocidadY) {
-        for (int r = 0; r < mapa.areasColision.size(); r++) {
-            final Rectangle area = mapa.areasColision.get(r);
+        for (int r = 0; r < ElementosPrincipales.mapa.areasColision.size(); r++) {
+            final Rectangle area = ElementosPrincipales.mapa.areasColision.get(r);
 
             int origenX = area.x;
             int origenY = area.y + velocidadY * (int) velocidad - 3 * (int) velocidad;
@@ -240,8 +237,8 @@ public class Jugador {
     }
 
     private boolean enColisionIzquierda(int velocidadX) {
-        for (int r = 0; r < mapa.areasColision.size(); r++) {
-            final Rectangle area = mapa.areasColision.get(r);
+        for (int r = 0; r < ElementosPrincipales.mapa.areasColision.size(); r++) {
+            final Rectangle area = ElementosPrincipales.mapa.areasColision.get(r);
 
             int origenX = area.x + velocidadX * (int) velocidad + 3 * (int) velocidad;
             int origenY = area.y;
@@ -255,8 +252,8 @@ public class Jugador {
     }
 
     private boolean enColisionDerecha(int velocidadX) {
-        for (int r = 0; r < mapa.areasColision.size(); r++) {
-            final Rectangle area = mapa.areasColision.get(r);
+        for (int r = 0; r < ElementosPrincipales.mapa.areasColision.size(); r++) {
+            final Rectangle area = ElementosPrincipales.mapa.areasColision.get(r);
 
             int origenX = area.x + velocidadX * (int) velocidad - 3 * (int) velocidad;
             int origenY = area.y;
@@ -274,7 +271,7 @@ public class Jugador {
         int posicionFuturaX = (int) posicionX + velocidadX * (int) velocidad;
         int posicionFuturaY = (int) posicionY + velocidadY * (int) velocidad;
 
-        final Rectangle bordesMapas = mapa.obtenerBordes(posicionFuturaX, posicionFuturaY, ANCHO_JUGADOR, ALTO_JUGADOR);
+        final Rectangle bordesMapas = ElementosPrincipales.mapa.obtenerBordes(posicionFuturaX, posicionFuturaY);
 
         final boolean fuera;
         if (LIMITE_ARRIBA.intersects(bordesMapas) || LIMITE_ABAJO.intersects(bordesMapas) || LIMITE_IZQUIERDA.intersects(bordesMapas) || LIMITE_DERECHA.intersects(bordesMapas)) {
@@ -333,6 +330,12 @@ public class Jugador {
     public double obtenerPosicionX() {
         return posicionX;
     }
+    public int obtenerPosicionXInt(){return (int) posicionX;}
+    public int obtenerPosicionYInt(){return (int) posicionY;}
+    public int obtenerAncho(){return ANCHO_JUGADOR;}
+    public int obtenerAlto(){return ALTO_JUGADOR;}
+    public int obtenerResistencia(){return resistencia;}
+
 
     public double obtenerPosicionY() {
         return posicionY;
