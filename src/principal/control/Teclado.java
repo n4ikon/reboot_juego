@@ -1,5 +1,11 @@
 package principal.control;
 
+import conexion.HttpHelper;
+import principal.ElementosPrincipales;
+import principal.entes.Jugador;
+import principal.inventario.Inventario;
+import principal.maquinaDeEstado.estados.menuDeJuego.MenuInventario;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -9,7 +15,7 @@ public class Teclado implements KeyListener {
     public Tecla abajo = new Tecla();
     public Tecla izquierda = new Tecla();
     public Tecla derecha = new Tecla();
-
+    public Tecla guardar =new Tecla();
     public boolean recoger = false;
 
     public boolean corriendo = false;
@@ -46,6 +52,10 @@ public class Teclado implements KeyListener {
                 inventarioActivo = !inventarioActivo;
                 break;
 
+            case KeyEvent.VK_L:
+                HttpHelper.Put_JSON(MenuInventario.nombre,ElementosPrincipales.jugador.obtenerPosicionXInt(),ElementosPrincipales.jugador.obtenerPosicionYInt());
+                break;
+
             case KeyEvent.VK_ESCAPE:
                 System.exit(0);
 
@@ -67,6 +77,9 @@ public class Teclado implements KeyListener {
                 break;
             case KeyEvent.VK_D:
                 derecha.teclaLiberada();
+                break;
+            case KeyEvent.VK_L:
+                guardar.teclaLiberada();
                 break;
             case KeyEvent.VK_E:
                 recoger = false;

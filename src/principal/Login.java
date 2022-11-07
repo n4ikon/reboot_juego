@@ -3,6 +3,7 @@ package principal;
 import conexion.Conversion;
 import conexion.HttpHelper;
 import principal.maquinaDeEstado.EstadoJuego;
+import principal.maquinaDeEstado.GestorDeEstado;
 import principal.maquinaDeEstado.estados.menuDeJuego.MenuInventario;
 
 import javax.swing.*;
@@ -42,11 +43,14 @@ public class Login extends  JFrame implements EstadoJuego {
                 setPasswordLogin(passwordField1);
                 getRequest();
 
+
                 dispose();
 
 
 
             }
+
+
         });
 
     }

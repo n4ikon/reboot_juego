@@ -12,16 +12,27 @@ public class Conversion {
    private String id;
     @SerializedName("password")
     private String password;
+    @SerializedName("posicionX")
+    private double posicionX;
+    @SerializedName("posicionY")
+    private double posicionY;
 
-
-
-    private Conversion(String nombre, String id){
+    private Conversion(String nombre, String id, double posicionX , double posicionY){
     this.id = id;
-    this.nombre = nombre; ;
+    this.nombre = nombre;
+    this.posicionX = posicionX;
+    this.posicionY = posicionY;
+
+}
+public double obtenerPosisionX (){
+        return  posicionX;
 }
 
+    public double obtenerPosisionY() {
+        return posicionY;
+    }
 
- public  String getNombre(){
+    public  String getNombre(){
 
    return this.nombre;
 }

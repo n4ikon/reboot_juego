@@ -36,7 +36,8 @@ public class Jugador {
     private final Rectangle LIMITE_IZQUIERDA = new Rectangle(Constantes.CENTRO_VENTANA_X - ANCHO_JUGADOR / 2, Constantes.CENTRO_VENTANA_Y, 1, ALTO_JUGADOR);
     private final Rectangle LIMITE_DERECHA = new Rectangle(Constantes.CENTRO_VENTANA_X + ANCHO_JUGADOR / 2, Constantes.CENTRO_VENTANA_Y, 1, ALTO_JUGADOR);
 
-
+    public static double establecerPosicionX2;
+    public static double establecerPosicionY2;
     private int animacion;
     private int estado;
 
@@ -48,8 +49,8 @@ public class Jugador {
 
 
     public Jugador() {
-        posicionX = ElementosPrincipales.mapa.obtenerPosicionInicial().getX();
-        posicionY = ElementosPrincipales.mapa.obtenerPosicionInicial().getY();
+        posicionX = posicionX;
+        posicionY = posicionY;
 
 
 
@@ -330,6 +331,7 @@ public class Jugador {
     public double obtenerPosicionX() {
         return posicionX;
     }
+
     public int obtenerPosicionXInt(){return (int) posicionX;}
     public int obtenerPosicionYInt(){return (int) posicionY;}
     public int obtenerAncho(){return ANCHO_JUGADOR;}
